@@ -2,6 +2,13 @@
 
 This project contains the training and testing code for the paper, as well as the model weights trained according to our method.
 
+## Model Weights
+The performance of our method is expressed as the mean and standard deviation of three different seed runs.
+| |  NCI-ISBI |  KvasirSEG |
+| :-: | :-: | :-: |
+| Ours | 81.17±0.46 | 81.83±0.38 |
+
+The download links for our model weights are as [Weights](https://pan.baidu.com/s/15XTbkr37H3xegxO6VhjELw?pwd=7777).
 
 ## Datasets
 The gaze of GazeMedSeg dataset can be downloaded at [Gaze](https://drive.google.com/drive/folders/1-38bG_81OsGVCb_trI00GSqfB_shCUQG).\
