@@ -30,11 +30,11 @@ def get_args_parser_1():
     parser.add_argument('--dataset', default='NCI', type=str) # Kvasir, NCI
     parser.add_argument('--max_len', default=10, type=int)
     parser.add_argument('--strategy', default='interpolate', type=str)  # truncate, interpolate
-    parser.add_argument('--output_dir', default='output/NCI_GazeTrajSeg_1e4_cos_5/')
+    parser.add_argument('--output_dir', default='output/exp/')
     parser.add_argument('--model', default='GazeTrajSeg', type=str)
     parser.add_argument('--t1', default=0.3, type=float)
     parser.add_argument('--t2', default=0.6, type=float)
-    parser.add_argument('--warmup', default=20, type=int)
+    parser.add_argument('--warmup', default=0, type=int)
     parser.add_argument('--threshold', default=0.78, type=float)
     parser.add_argument('--device', default='cuda', type=str)
     parser.add_argument('--GPU_ids', type=str, default='0', help='Ids of GPUs')
@@ -56,12 +56,7 @@ def main(args):
 
     device = torch.device(args.device)
 
-    if args.model == 'GazeTrajSeg':
-        model = GazeTrajSeg()
-    elif args.model == 'GazeTrajSeg_2':
-        model = GazeTrajSeg_2()
-    elif args.model == 'ViGUNet':
-        model = ViGUNet()
+    model = GazeTrajSeg()
     model.to(device)
 
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
@@ -122,4 +117,5 @@ if __name__ == '__main__':
         Path(args.output_dir).mkdir(parents=True, exist_ok=True)
     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
     os.environ["CUDA_VISIBLE_DEVICES"] = "{}".format(args.GPU_ids)
+
     main(args)
