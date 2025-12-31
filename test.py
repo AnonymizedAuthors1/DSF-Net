@@ -146,68 +146,11 @@ if __name__ == '__main__':
         img_name = data['path'][0]
         output_img.save(output_save_dir + img_name.split('.')[0] + '.png')
 
-        # # draw
-        # output_fg, output_bg, output_uc = model.get_output_d3()
-        # output_fg = F.interpolate(output_fg, size=label.shape[2:], mode="bilinear")
-        # output_fg = (output_fg - torch.min(output_fg)) / (torch.max(output_fg) - torch.min(output_fg))
-        # output_fg = torch.where(output_fg > 0.5, 1, 0)
-        # output_fg = np.array(output_fg[0, 0].detach().cpu(), np.uint8) * 255
-        # output_fg = Image.fromarray(output_fg).convert('L')
-        # output_fg.save(args.output_dir + "/output_fg/" + img_name.split('.')[0] + '.png')
-        #
-        # output_bg = F.interpolate(output_bg, size=label.shape[2:], mode="bilinear")
-        # output_bg = (output_bg - torch.min(output_bg)) / (torch.max(output_bg) - torch.min(output_bg))
-        # output_bg = torch.where(output_bg > 0.5, 1, 0)
-        # output_bg = np.array(output_bg[0, 0].detach().cpu(), np.uint8) * 255
-        # output_bg = Image.fromarray(output_bg).convert('L')
-        # output_bg.save(args.output_dir + "/output_bg/" + img_name.split('.')[0] + '.png')
-        #
-        # output_uc = F.interpolate(output_uc, size=label.shape[2:], mode="bilinear")
-        # output_uc = (output_uc - torch.min(output_uc)) / (torch.max(output_uc) - torch.min(output_uc))
-        # output_uc = np.array(output_uc[0, 0].detach().cpu() * 255, np.uint8)
-        # output_uc = Image.fromarray(output_uc).convert('L')
-        # output_uc.save(args.output_dir + "/output_uc/" + img_name.split('.')[0] + '.png')
-        #
-        # img = (img - torch.min(img)) / (torch.max(img) - torch.min(img))
-        # img = np.array(img[0].detach().cpu() * 255, np.uint8).transpose(1, 2, 0)
-        # img = Image.fromarray(img)
-        # img.save(args.output_dir + "/img/" + img_name.split('.')[0] + '.png')
-        #
-        # img_aug = data['image_aug'].to(args.device)
-        # output_aug = model(img_aug, None)
-        # img_aug = (img_aug - torch.min(img_aug)) / (torch.max(img_aug) - torch.min(img_aug))
-        # img_aug = np.array(img_aug[0].detach().cpu() * 255, np.uint8).transpose(1, 2, 0)
-        # img_aug = Image.fromarray(img_aug)
-        # img_aug.save(args.output_dir + "/img_aug/" + img_name.split('.')[0] + '.png')
-        #
-        # img_strong_aug = StrongAugmentations()(data['image'].to(args.device))
-        # output_strong_aug = model(img_strong_aug, None)
-        # img_strong_aug = (img_strong_aug - torch.min(img_strong_aug)) / (torch.max(img_strong_aug) - torch.min(img_strong_aug))
-        # img_strong_aug = np.array(img_strong_aug[0].detach().cpu() * 255, np.uint8).transpose(1, 2, 0)
-        # img_strong_aug = Image.fromarray(img_strong_aug)
-        # img_strong_aug.save(args.output_dir + "/img_strong_aug/" + img_name.split('.')[0] + '.png')
-        #
-        # output_aug = np.array(output_aug[0, 0].detach().cpu(), np.uint8) * 255
-        # output_aug = Image.fromarray(output_aug).convert('L')
-        # img_name = data['path'][0]
-        # output_aug.save(args.output_dir + "/output_aug/" + img_name.split('.')[0] + '.png')
-        # output_strong_aug = np.array(output_strong_aug[0, 0].detach().cpu(), np.uint8) * 255
-        # output_strong_aug = Image.fromarray(output_strong_aug).convert('L')
-        # img_name = data['path'][0]
-        # output_strong_aug.save(args.output_dir + "/output_strong_aug/" + img_name.split('.')[0] + '.png')
-        #
-        # gaze_aug = data['pseudo_label_aug'].to(args.device)
-        # gaze_aug = torch.where(gaze_aug < 0.3, 0, gaze_aug)
-        # gaze_aug = torch.where(gaze_aug > 0.6, 2, gaze_aug)
-        # gaze_aug = torch.where((gaze_aug >= 0.3) & (gaze_aug <= 0.6), 1, gaze_aug)
-        # gaze_aug = np.array(gaze_aug[0, 0].detach().cpu(), np.uint8) * 127
-        # gaze_aug = Image.fromarray(gaze_aug).convert('L')
-        # gaze_aug.save(args.output_dir + "/gaze_aug/" + img_name.split('.')[0] + '.png')
-
     dice_score = np.array(dice_score_list).mean()
     dice_std = np.array(dice_score_list).std()
     print(dice_score, dice_std)
 
     dice_score = np.array(my_dice_score_list).mean()
     dice_std = np.array(my_dice_score_list).std()
+
     print(dice_score, dice_std)
